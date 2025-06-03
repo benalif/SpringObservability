@@ -33,5 +33,6 @@ This project is a Spring Boot application integrated with Prometheus to expose a
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-rep
+git clone https://github.com/benalif/SpringObservability.git
+cd SpringObservability/ && mvn clean package
+docker-compose up -d
