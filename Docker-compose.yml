@@ -1,6 +1,8 @@
 services:
   spring-observability:
-    image: spring-observability:1.0.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     container_name: spring-observability
     ports:
       - "8080:8080"
@@ -26,8 +28,8 @@ services:
       - "3000:3000"
     volumes:
       - ./monitoring/provisioning:/etc/grafana/provisioning
-    environment:
-      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=./monitoring/provisioning/dashboards/spring-boot-dashboard.json
+#    environment:
+#      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH= ./monitoring/provisioning/dashboards/spring-boot-dashboard.json
     networks:
       - observabilityNetwork
 
