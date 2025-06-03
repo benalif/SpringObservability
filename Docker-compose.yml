@@ -18,14 +18,16 @@ services:
       - observabilityNetwork
 
   grafana:
-    image: grafana/grafana-enterprise
+#    image: grafana/grafana-enterprise
+    image: grafana/grafana-oss
     container_name: grafana
+    restart: unless-stopped
     ports:
       - "3000:3000"
     volumes:
       - ./monitoring/provisioning:/etc/grafana/provisioning
-    depends_on:
-      - prometheus
+    environment:
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=./monitoring/provisioning/dashboards/spring-boot-dashboard.json
     networks:
       - observabilityNetwork
 
