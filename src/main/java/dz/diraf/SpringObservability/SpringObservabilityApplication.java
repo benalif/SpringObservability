@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @RestController
@@ -17,14 +18,24 @@ import org.springframework.web.bind.annotation.RestController;
 public class SpringObservabilityApplication implements CommandLineRunner {
 
     private final UserRepository userRepository;
+    private final RestTemplate restTemplate;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringObservabilityApplication.class, args);
     }
 
     @GetMapping("/")
-    public String index() {
-        return "Hello Spring boot observability";
+    public String getPet() {
+        log.info("get pet from MS1");
+        return restTemplate.getForObject("http://localhost:8081/pet", String.class);
+
+    }
+
+
+    @GetMapping("/pet")
+    public String getPetFromApi() {
+        log.info("get pet from MS2");
+        return  restTemplate.getForObject("https://petstore.swagger.io/v2/pet/3", String.class);
     }
 
     @Override
