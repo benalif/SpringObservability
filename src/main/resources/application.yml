@@ -9,6 +9,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create-drop
+# enable tracing for openfeign
+  cloud:
+    openfeign:
+      micrometer:
+        enabled: true
 
 server:
   port: 8080
